@@ -1,112 +1,109 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import FlexCarousel from './FlexCarousel'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const galleryImages = [
-  { src: '/hoverimg1.jpeg', alt: 'Grand ballroom setup' },
-  { src: '/hoverimg2.jpeg', alt: 'Wedding decoration' },
-  { src: '/hoverimg3.jpeg', alt: 'Elegant dining arrangement' },
-  { src: '/hoverimg1.jpeg', alt: 'Stage decoration' },
-  { src: '/hoverimg2.jpeg', alt: 'Floral arrangement' },
-  { src: '/hoverimg3.jpeg', alt: 'Reception area' },
+const galleryItems = [
+  {
+    src: './hoverimg1.jpeg',
+    alt: 'Grand ballroom arrangement with banquet dining',
+    title: 'Grand Ballroom',
+    subtitle: 'Royal Seating & Architecture'
+  },
+  {
+    src: './hoverimg2.jpeg',
+    alt: 'Opulent wedding stage decoration with golden lights',
+    title: 'Imperial Stage',
+    subtitle: 'Vows in Golden Splendor'
+  },
+  {
+    src: './hoverimg3.jpeg',
+    alt: 'Fine dining banquet table arrangement and florals',
+    title: 'Culinary Grandeur',
+    subtitle: 'Five-Star Hospitality'
+  },
+  {
+    src: './fourthsectionbg.png',
+    alt: 'Architectural entrance with ambient lighting',
+    title: 'The Grand Entrance',
+    subtitle: 'First Impressions of Luxury'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80&auto=format&fit=max',
+    alt: 'Luminescent golden chandeliers',
+    title: 'Golden Chandeliers',
+    subtitle: 'Illuminating Forever'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80&auto=format&fit=max',
+    alt: 'Lavish floral decor and ceremonial walkway',
+    title: 'Floral Tapestry',
+    subtitle: 'Bespoke Celebration Styling'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80&auto=format&fit=max',
+    alt: 'Celebration toast and banquet gathering',
+    title: 'Evening Celebrations',
+    subtitle: 'Unforgettable Soirées'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1200&q=80&auto=format&fit=max',
+    alt: 'Royal wedding aisle and ambient lighting',
+    title: 'The Royal Aisle',
+    subtitle: 'Cinematic Grandeur'
+  }
 ]
 
-const ZoomIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-    <path d="M11 8v6M8 11h6" />
-  </svg>
-)
-
 export default function Gallery() {
-  const [lightboxImg, setLightboxImg] = useState(null)
   const sectionRef = useRef(null)
-  const itemsRef = useRef([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ── SCRUB CLIP-PATH ON THE SECTION ITSELF ──
       gsap.fromTo(sectionRef.current,
-        { y: 120, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
+          duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 85%',
-            end: 'top 30%',
-            scrub: true,
           }
         }
       )
-
-      itemsRef.current.forEach((item, i) => {
-        if (!item) return
-        gsap.to(item, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: i * 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          }
-        })
-      })
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <>
-      <section ref={sectionRef} className="section gallery" id="gallery">
-        <div className="gallery__header">
-          <p className="section__label">Gallery</p>
-          <h2 className="section__title">Moments Captured in Gold</h2>
-          <p className="section__subtitle">
-            A glimpse into the elegance and grandeur that defines every event at Alakananda
-          </p>
-        </div>
-
-        <div className="gallery__grid">
-          {galleryImages.map((img, i) => (
-            <div
-              key={i}
-              ref={el => itemsRef.current[i] = el}
-              className="gallery__item"
-              onClick={() => setLightboxImg(img.src)}
-            >
-              <img src={img.src} alt={img.alt} loading="lazy" />
-              <div className="gallery__item-overlay">
-                <ZoomIcon />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Lightbox */}
-      <div
-        className={`lightbox ${lightboxImg ? 'active' : ''}`}
-        onClick={() => setLightboxImg(null)}
-      >
-        <button className="lightbox__close" onClick={() => setLightboxImg(null)}>✕</button>
-        {lightboxImg && (
-          <img
-            className="lightbox__img"
-            src={lightboxImg}
-            alt="Full view"
-            onClick={e => e.stopPropagation()}
-          />
-        )}
+    <section ref={sectionRef} className="section gallery" id="gallery">
+      <div className="gallery__header">
+        <p className="section__label">Gallery</p>
+        <h2 className="section__title">Moments Captured in Gold</h2>
+        <p className="section__subtitle">
+          Swipe, scroll, or click cards to explore the grandeur that defines every celebration at Alakananda
+        </p>
       </div>
-    </>
+
+      <div className="gallery__carousel-wrapper">
+        <FlexCarousel
+          items={galleryItems}
+          preset="liquid"
+          intro="rise"
+          cardHeight={0.54}
+          gap={16}
+          radius={12}
+          squeeze={0.2}
+          focusOnClick
+          captions
+          autoplay
+          interval={4}
+        />
+      </div>
+    </section>
   )
 }

@@ -608,6 +608,15 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
+.gallery__carousel-wrapper {
+  width: 100%;
+  height: clamp(480px, 62vh, 640px);
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
 .gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
