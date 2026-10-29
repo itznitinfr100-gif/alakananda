@@ -331,14 +331,12 @@ h1, h2, h3, h4, h5, h6 {
 .hero__title {
   font-family: var(--font-heading);
   font-size: clamp(3rem, 7vw, 6rem);
-  color: var(--text-ivory);
   letter-spacing: 8px;
   text-transform: uppercase;
   opacity: 0;
-  background: linear-gradient(135deg, var(--text-ivory) 30%, var(--accent-soft-gold) 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__tagline {

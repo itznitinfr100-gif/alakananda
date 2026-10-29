@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import GradientText from './GradientText'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -97,7 +98,14 @@ export default function Hero({ visible }) {
           className="hero__title"
           style={{ transform: 'translateY(30px)' }}
         >
-          Alakananda
+          <GradientText
+            colors={["#f97316", "#eab308", "#ffffff"]}
+            animationSpeed={4.5}
+            variant="flow"
+            glow={0.4}
+          >
+            Alakananda
+          </GradientText>
         </h1>
         <p
           ref={taglineRef}
