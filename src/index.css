@@ -318,6 +318,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 .hero__logo {
@@ -330,22 +333,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero__title {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 7vw, 6rem);
-  letter-spacing: 8px;
+  font-size: clamp(2rem, 7.5vw, 5.5rem);
+  letter-spacing: clamp(2px, 0.8vw, 8px);
   text-transform: uppercase;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  line-height: 1.15;
 }
 
 .hero__tagline {
   font-family: var(--font-heading);
   font-style: italic;
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.5rem);
   color: var(--accent-soft-gold);
-  letter-spacing: 4px;
+  letter-spacing: clamp(1.5px, 0.4vw, 4px);
   opacity: 0;
+  max-width: 90%;
 }
 
 .hero__buttons {
@@ -1420,6 +1428,26 @@ h1, h2, h3, h4, h5, h6 {
     padding: 14px 24px;
   }
 
+  .hero__content {
+    gap: 14px;
+    padding: 0 16px;
+  }
+
+  .hero__logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .hero__title {
+    font-size: clamp(1.85rem, 8vw, 3rem);
+    letter-spacing: 3px;
+  }
+
+  .hero__tagline {
+    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+    letter-spacing: 2px;
+  }
+
   .hero__buttons {
     flex-direction: column;
     gap: 14px;
@@ -1482,6 +1510,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+  .hero__logo {
+    width: 65px;
+    height: 65px;
+  }
+
+  .hero__title {
+    font-size: clamp(1.4rem, 7.5vw, 2.1rem);
+    letter-spacing: 1.5px;
+  }
+
+  .hero__tagline {
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+  }
+
   .about__stats {
     flex-wrap: wrap;
     gap: 24px;
